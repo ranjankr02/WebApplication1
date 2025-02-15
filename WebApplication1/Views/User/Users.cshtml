@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using WebApplication1.App.DataTransferLayer.DTOs;
+@model List<UserDto>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h2 class="text-center my-3">User Details</h2>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Profile</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                @* <td>
+                    <img src="~/images/@user.ProfileImage" class="profile-img" alt="User Image">
+                </td> *@
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>
+                    @if (user.Gender == "Male")
+                    {
+                        <i class="fas fa-mars text-primary"></i>
+                      
+                    }
+                    else if (user.Gender == "Female")
+                    {
+                        <i class="fas fa-venus text-danger"></i>
+                       
+                    }
+                    else
+                    {
+                        <i class="fas fa-user"></i>
+                       
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    .profile-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+</style>
