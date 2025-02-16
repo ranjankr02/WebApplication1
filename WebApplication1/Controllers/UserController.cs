@@ -24,5 +24,38 @@ namespace WebApplication1.Controllers
             List<UserDto> users = (await _userService.GetAllUserAsync()).ToList();
             return View(users);
         }
+
+        // 🚀 GET: Load User Detail Page
+        public async Task <IActionResult> UserDetail(int? id)
+        {
+            if (id == null) // Create New User
+            {
+                return View(new UserDto());
+            }
+
+            UserDto user = await _userService.GetUserByIdAsync(id.Value);
+            if (user == null)
+                return NotFound();
+
+            return View(user); // Load existing user data for editing
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UserDetail(UserDto userDto)
+        {
+            if (!ModelState.IsValid)
+                return View(userDto);
+
+            if (userDto.Id == 0)
+            {
+                await _userService.CreateUserAsync(userDto); // Add User
+            }
+            else
+            {
+                await _userService.UpdateUserAsync(userDto); // Update User
+            }
+
+            return RedirectToAction("Users");
+        }
     }
 }

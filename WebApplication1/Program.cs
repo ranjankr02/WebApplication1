@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.App.BAL.Helpers;
 using WebApplication1.App.DAL;
 using WebApplication1.App.DataTransferLayer;
 
@@ -9,6 +10,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDatTransferLayerServices();
 builder.Services.AddDALRepositoriesServices();
+
+//  Register AutoMapper
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

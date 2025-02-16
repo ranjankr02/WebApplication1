@@ -10,15 +10,20 @@
     ViewData["Title"] = "User List";
 }
 
-<h2 class="text-center my-3">User Details</h2>
+<h2>User Management</h2>
+
+<a asp-action="UserDetail" class="btn btn-primary">Add New User</a> <!-- Button for New User -->
+
+@* <h2 class="text-center my-3">User Details</h2> *@
 
 <table class="table table-bordered table-hover">
     <thead class="table-dark">
         <tr>
-            <th>Profile</th>
+           @*  <th>Profile</th> *@
             <th>Username</th>
             <th>Email</th>
             <th>Gender</th>
+            <th>Edit</th>
         </tr>
     </thead>
     <tbody>
@@ -30,8 +35,8 @@
                 </td> *@
                 <td>@user.UserName</td>
                 <td>@user.Email</td>
-                <td>
-                    @if (user.Gender == "Male")
+                <td>@user.Gender</td>
+                   @*  @if (user.Gender == "Male")
                     {
                         <i class="fas fa-mars text-primary"></i>
                       
@@ -45,8 +50,12 @@
                     {
                         <i class="fas fa-user"></i>
                        
-                    }
+                    } *@
+               
+                <td>
+                    <a asp-action="UserDetail" asp-route-id="@user.Id" class="btn btn-warning">User Details</a>
                 </td>
+
             </tr>
         }
     </tbody>
