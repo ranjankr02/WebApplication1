@@ -57,5 +57,23 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("Users");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(UserDto userDto)
+        {
+            //if (ModelState.IsValid)
+            //    return View(userDto);
+
+            if (userDto.Id == 0)
+            {
+                return View(userDto);   // await _userService.CreateUserAsync(userDto); // Add User
+            }
+            else
+            {
+                await _userService.DeleteUserAsync(userDto.Id); // Delete User
+            }
+
+            return RedirectToAction("Users");
+        }
     }
 }

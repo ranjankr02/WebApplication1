@@ -11,6 +11,7 @@ namespace WebApplication1.App.BAL.Services
         Task <UserDto> GetUserByIdAsync(int Id);
         Task CreateUserAsync(UserDto userDto);  // 🚀 Method to add user
         Task UpdateUserAsync(UserDto userDto);
+        Task DeleteUserAsync(int Id);
     }
     public class UserService : IUserService
     {
@@ -63,6 +64,12 @@ namespace WebApplication1.App.BAL.Services
         {
             var user = _mapper.Map<User>(userDto); // Convert DTO to Entity
             await _userRepositoryDAL.UpdateUserAsync(user);
+        }
+
+        public async Task DeleteUserAsync(int Id)
+        {
+            //var user = _mapper.Map<User>(userDto); // Convert DTO to Entity
+            await _userRepositoryDAL.DeleteUserAsync(Id);
         }
     }
 }
